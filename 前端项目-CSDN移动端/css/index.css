@@ -1,0 +1,30 @@
+/*设置外层容器*/
+.nav{
+    width: 100%;
+}
+.nav-inner0{
+    display: flex;
+}
+.item0{
+    flex: auto;
+}
+.item0 img{
+    width: 100%;
+}
+/*设置每一行的外层容器*/
+.nav-inner{
+    display: flex;
+    justify-content: space-around;
+}
+.item{
+    /*flex: auto/*;/*可以随屏幕而变化*/
+    width: 18%;
+}
+.item img{
+    width: 100%;/*设置图片的宽度和父元素的宽度一样*/
+
+}
+.item a{
+    text-align: center;
+    font-size: 14px;
+}
