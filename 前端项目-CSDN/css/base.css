@@ -1,0 +1,26 @@
+/*解决高度塌陷和外边距重叠问题*/
+/*伪类选择器*/
+.clearfix::before,
+.clearfix::after{
+    display: table;
+    clear:both;
+    content: '';
+}
+
+/*字体大小*/
+body{
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+    color:#212529;
+    min-width: 1226px;/*不让body过小导致容器溢出*/
+}
+/*设置一个类，用来表示中间容器的宽度*/
+.w{
+    width:1226px;/*固定容器宽度*/
+    margin: 0 auto; /*在屏幕中是居中的*/
+}
+
+/*去除a的下划线*/
+a{
+    text-decoration: none;
+    color: #424242;
+}
