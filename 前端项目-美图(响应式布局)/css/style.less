@@ -1,0 +1,153 @@
+//导航条的外部容器
+//所有的都不用去管宽度
+.top-bar-wrapper{
+    background-color: #ff6700;
+}
+
+.top-bar{ 
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 48px;
+    padding: 0 14px;
+   
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ff6700;
+
+    a{
+        text-decoration: none;
+        color: #fff;
+        &:hover{
+            color: rgb(197,196,196);
+        }
+    }
+}
+//设置左侧导航的图标
+.left-menu{
+    &:active{
+        .nav{
+            display: block;
+        }
+    }
+    //设置菜单
+    .nav{
+        display: none;
+        position: absolute;
+        top:48px;
+        //设置背景颜色
+        background-color: #424242;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        padding-top: 60px;
+        li{
+            width: 80%;
+            margin: 0 auto;
+            border-bottom: 1px solid #757474;
+            a{
+                display: block;
+                line-height: 44px;
+                font-size: 14px;
+               
+            }
+            &:last-child a{
+               display: inline-block;
+               margin-right: 6px;
+            }
+            span{
+                color: #fff;
+                font-size: 12px;
+            }
+        }
+
+    }
+    //图标
+    .menu-icon{
+        width: 18px;
+        height: 48px;
+        position: relative;
+
+        //导航的线
+        li{
+            width: 18px;
+            height: 1px;
+            background-color: #fff;
+            position: absolute;
+            //修改变形的原点
+            transform-origin: left center;
+            transition: 0.5s;
+        }
+        li:nth-child(1){
+            top:18px;
+        }
+
+        li:nth-child(2){
+            top:24px;
+        }
+
+        li:nth-child(3){
+             top:30px;
+        }
+        //&表示外层元素
+        //鼠标移入的效果，正常时js来写的
+        &:active{
+            //显示隐藏的菜单
+            li:nth-child(1){
+            //向下旋转
+            transform: rotateZ(40deg);
+            }
+
+           li:nth-child(2){
+             opacity: 0;
+           }
+
+           li:nth-child(3){
+             transform: rotateZ(-40deg);
+           }
+        }
+    }
+}
+
+//设置媒体查询
+@media only screen{
+    @media (min-width:768px){
+        //利用弹性盒子的order去掉换顺序
+        .left-menu{
+            order:2;
+            flex: auto;
+            //显示菜单
+            .nav{
+                display: flex;
+                position: static;
+                padding: 0;
+                background-color: #ff6700;
+                justify-content: space-around;
+                li{
+                    width: auto;
+                    border-bottom: none;
+                    margin: 0;
+                    a{
+                        line-height: 48px;
+                    }
+
+                    span{
+                        display: none;
+                    }
+                }
+            }
+            //隐藏菜单的图标
+            .menu-icon{
+                display: none;
+            }
+        }
+
+        .logo{
+          order:1;
+        }
+
+        .user-info{
+          order:3;
+        }
+    }
+}
