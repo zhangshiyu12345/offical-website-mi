@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Div跟随鼠标移动</title>
+    <style type="text/css">
+         #box1{
+            width: 100px;
+            height: 100px;
+            background-color: #ff6700;
+            position: absolute;
+         }
+    </style>
+    <script type="text/javascript">
+         window.onload=function(){
+             //使div可以跟随鼠标移动
+             var box1=document.getElementById("box1");
+             //绑定鼠标移动事件,只有鼠标在box1时才会触发,所以应该绑定给document
+             document.onmousemove=function(event){
+                 //获取鼠标的位置 event(事件对象)
+                 event=event||window.event;
+
+                 //chrome认为滚动条是body的,火狐等浏览器认为滚动条时htnl的
+                 //var st=document.body.scrollTop;
+                 //垂直的
+                 var st=document.documentElement.scrollTop||document.body.scrollTop;//老样子，自己写一个函数，解决兼容性问题
+                 //水平的
+                 var sl=document.documentElement.scrollLeft||document.body.scrollLeft;
+                 
+                 var left=event.clientX; //clientX没有单位px,只是一个数值，获取鼠标在当前可见窗口的坐标
+                 var top=event.clientY;//pageX可以获取鼠标相对于页面的坐标,当ie8不兼容
+                 //也可以直接让box1往下移滚动条的距离
+
+                 //设置div的偏移量,只对开启了定位的元素起作用
+                 //pageX和pageY可以获取鼠标相对于当前页面的坐标
+                 box1.style.left=left+sl+"px";
+                 box1.style.top=top+st+"px";
+
+
+
+             };
+         };
+    </script>
+</head>
+<body>
+    <div id="box1">
+
+    </div>
+</body>
+</html>
