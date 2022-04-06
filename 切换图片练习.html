@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>切换图片</title>
+    <style type="text/css">
+         
+    </style>
+
+    <script type="text/javascript">
+           window.onload=function(){
+               //使图片可以自动切换
+               var img1=document.getElementById("img1");
+               var btn=document.getElementById("btn");
+               var btn2=document.getElementById("btn2");
+               //
+               var imgArr=["../images/1.jpg","../images/2.jpg","../images/3.jpg","../images/4.jpg"];
+               //保存当前图片的索引
+               var index=0;
+               var timer;
+               btn.onclick=function(){
+                   //关闭的是当前元素的其他定时器
+                   clearInterval(timer);
+                     //开启一个定时器
+               timer=setInterval(function(){
+                   index++;
+                   //if(index>=imgArr.length)
+                  // {
+                  //     index=0;
+                   //}
+                   index=index%imgArr.length;
+                   img1.src=imgArr[index];
+               },1000);
+               };
+
+             btn2.onclick=function(){
+                 //点击按钮停止图片动
+                clearInterval(timer)
+             };
+             
+           };
+    </script>
+</head>
+<body>
+    <img id="img1" src="../images/1.jpg">
+    <button id="btn">开始</button>
+    <button id="btn2">停止</button>
+</body>
+</html>
