@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #outer{
+            width: 520px;
+            height: 333px;
+            margin: 50px auto;
+            background-color: greenyellow;
+            padding: 10px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        #imgList{
+            list-style: none;
+            position: absolute;
+        }
+        #imgList li{
+            float: left;
+            margin: 0 10px;
+        }
+        #navDiv{
+            position: absolute;
+            bottom: 15px;
+
+        }
+        #navDiv a{
+            float: left;
+            width: 15px;
+            height: 15px;
+            background-color: red;
+            margin: 0 5px;
+            opacity: 0.5;
+            filter: alpha(opacity=50);/*兼容ie8透明*/
+        }
+        #navDiv a:hover{
+            background-color: black;
+        }
+    </style>
+    <script type="text/javascript" src="../js/tool.js"></script>
+    <script type="text/javascript">
+         window.onload=function(){
+             var imgList=document.getElementById("imgList");
+             var imgArr=document.getElementsByTagName("img");
+             imgList.style.width=520*imgArr.length+"px";
+             var navDiv=document.getElementById("navDiv");
+             var outer=document.getElementById("outer");
+             navDiv.style.left=(outer.offsetWidth-navDiv.offsetWidth)/2+"px";
+             var index=0;
+             var allA=document.getElementsByTagName("a");
+             allA[index].style.backgroundColor="black";
+             for(var i=0;i<allA.length;i++)
+             {
+                 //给这个数组填加一个属性，让他知到自己是第几个
+                 allA[i].num=i;
+                allA[i].onclick=function(){
+                    clearInterval(timer);
+                    index=this.num;
+                   // imgList.style.left=-520*index+"px"
+                    setA();
+                    move(imgList,"left",-520*index,30,function () {
+                        autoChange();
+                    });
+                };
+             }
+             autoChange();
+             //创建一个函数，用来开启自动切换图片
+             var timer;
+             function autoChange(){
+                 time=setInterval(function(){
+                    index++;
+                    index%=imgArr.length;
+                    move(imgList,"left",-520*index,20,function(){
+                        setA();
+                    });
+                 },3000);
+             }
+             //设置a
+             function setA(){
+                 if(index>=imgArr.length-1){
+                      index=0;
+                      //通过css将最后一张切换为最后一张
+                    imgList.style.left=0;
+                }
+                 for(var i=0;i<allA.length;i++)
+                 {
+                   allA[i].style.background="";
+
+                 }
+                 allA[index].style.background="black";
+
+             };
+         };
+    </script>
+</head>
+<body>
+    <!-- 创建一个外部的div，来作为大的容器 -->
+		<div id="outer">
+			<!-- 创建一个ul，用于放置图片 -->
+			<ul id="imgList">
+				<li><img src="../images/1.jpg"/></li>
+				<li><img src="../images/2.jpg"/></li>     
+				<li><img src="../images/3.jpg"/></li>
+				<li><img src="../images/4.jpg"/></li>
+				<li><img src="../images/5.jpg"/></li>
+                <li><img src="../images/1.jpg"/></li>
+			</ul>
+			<!--创建导航按钮-->
+			<div id="navDiv">
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+			</div>
+		</div>
+</body>
+</html>
